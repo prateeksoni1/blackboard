@@ -1,10 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import Canvas from 'react-canvas-draw';
 import classes from './draw.module.scss';
 import Toolbar from './toolbar/toolbar.component';
 
-const DrawPage = () => {
+const DrawPage = ({ socket, match }) => {
   const canvasRef = useRef();
+
+  useEffect(() => {
+    socket.emit('join-room', match.params.id);
+  }, [socket, match.params.id]);
 
   const [canvasConfig, setCanvasConfig] = useState({
     canvasHeight: '100vh',
