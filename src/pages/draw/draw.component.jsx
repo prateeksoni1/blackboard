@@ -3,6 +3,7 @@ import Canvas from 'react-canvas-draw';
 import { isEqual } from 'lodash';
 import classes from './draw.module.scss';
 import Toolbar from './toolbar/toolbar.component';
+import ChatWindow from './chatWindow';
 
 const DrawPage = ({ socket, match }) => {
   const canvasRef = useRef();
@@ -60,6 +61,7 @@ const DrawPage = ({ socket, match }) => {
         onChange={handleChange}
         saveData={canvasData.toString()}
       />
+      <ChatWindow />
     </div>
   );
 };
