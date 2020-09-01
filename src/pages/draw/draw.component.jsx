@@ -61,7 +61,7 @@ const DrawPage = ({ socket, match }) => {
         onChange={handleChange}
         saveData={canvasData.toString()}
       />
-      <ChatWindow />
+      <ChatWindow socket={socket} id={match.params.id} />
     </div>
   );
 };
