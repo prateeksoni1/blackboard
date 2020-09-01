@@ -4,7 +4,7 @@ import io from 'socket.io-client';
 import HeroPage from '../pages/hero';
 import DrawPage from '../pages/draw/draw.component';
 
-const socket = io('http://localhost:4000');
+const socket = io('https://blackboard-backend.herokuapp.com/');
 
 socket.on('connect', () => {
   // eslint-disable-next-line no-console
