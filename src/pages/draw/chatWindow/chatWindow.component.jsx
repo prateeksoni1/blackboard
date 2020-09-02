@@ -34,7 +34,9 @@ const ChatWindow = ({ socket, id }) => {
     socket.on('receive-message', (msg) => {
       setMessages([...messages, msg]);
     });
+  }, [messages]);
 
+  useEffect(() => {
     if (!loading) {
       localStorage.setItem(id, JSON.stringify(messages));
     }
@@ -42,11 +44,10 @@ const ChatWindow = ({ socket, id }) => {
 
   useEffect(() => {
     const data = localStorage.getItem(id);
-
     if (data) {
       setMessages(JSON.parse(data));
-      setLoading(false);
     }
+    setLoading(false);
   }, []);
 
   return (
