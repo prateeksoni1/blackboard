@@ -3,9 +3,9 @@
 import React, { useState, useEffect } from 'react';
 import classes from './chatWindow.module.scss';
 
-// eslint-disable-next-line arrow-body-style
 const ChatWindow = ({ socket, id }) => {
   const [name, setName] = useState('anonymous');
+  const [loading, setLoading] = useState(true);
 
   const [messages, setMessages] = useState([]);
 
@@ -34,7 +34,20 @@ const ChatWindow = ({ socket, id }) => {
     socket.on('receive-message', (msg) => {
       setMessages([...messages, msg]);
     });
+
+    if (!loading) {
+      localStorage.setItem(id, JSON.stringify(messages));
+    }
   }, [messages]);
+
+  useEffect(() => {
+    const data = localStorage.getItem(id);
+
+    if (data) {
+      setMessages(JSON.parse(data));
+      setLoading(false);
+    }
+  }, []);
 
   return (
     <div className={classes.chat}>
